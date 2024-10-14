@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
     vector<string> cars;
-    string car, it;
+    string car,item, it;
 
     // Asking the user to enter 3 car models
     cout << "Enter 3 car models:" << endl;
@@ -35,17 +35,35 @@ transform(cars.begin(), cars.end(), cars.begin(), [](string &s) {
     for (auto& chars: it){
         chars=tolower(chars);
     }
-    cout<<"you are searching for: "<<it<<endl;
+    cout<<"enter an item you want to delete "<<it<<endl;
 
     auto temp=find(cars.begin(), cars.end(), it);
     if(temp!= cars.end()){
 
-        cout<<"found";
+        cout<<"found here: "<<distance(cars.begin(), temp++) +1<<endl;
+        
+      // Asking the user if they want to delete the car model
+        cout << "Do you want to delete this car model? (yes/no): ";
+        string response;
+        cin >> response;
+
+        if (response == "yes") {
+            cars.erase(temp);
+            cout << "Car model deleted successfully." << endl;
+
+            sort(cars.begin(), cars.end());
+            cout << "Updated a sorted list of cars: " << endl;
+            for (const auto& car : cars) {
+                cout << car << endl;
+            }
+        }
+
     }
     else{
 
         cout<<"not found";
     }
 
+  
     return 0;
 }
